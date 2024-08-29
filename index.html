@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet" />
+    <style>
+      body {
+        background-color: #f0f7e3;
+      }
+
+      .slider_container_main * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+
+      .slider_container_main {
+        margin-top: 50px !important;
+      }
+
+      .slider_container_main {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 150px !important;
+      }
+
+      .slider_container_main .main_slides {
+        position: relative;
+
+        .pagination_container {
+          position: absolute;
+          bottom: -140px;
+          height: 120px;
+          width: 308px;
+          left: 50%;
+          transform: translate(-50%, 0) scale(1);
+          overflow: hidden;
+        }
+
+        .splide__pagination {
+          flex-wrap: nowrap;
+          gap: 28px;
+          top: 8px;
+          outline: none;
+          left: 0;
+          justify-content: left;
+          transition: all 0.2s ease;
+
+          .splide__pagination__page {
+            width: 70px;
+            height: 70px;
+            display: block;
+            transition: all 0.2s ease;
+            box-shadow: 1.09px 2.17px 6.51px 1.09px #0000004d;
+            background-size: cover;
+          }
+
+          .splide__pagination__page:hover {
+            opacity: 0.8;
+          }
+
+          .splide__pagination__page.is-active {
+            transform: scale(1.4);
+            opacity: 1;
+          }
+        }
+
+        .splide__arrows {
+          position: absolute;
+          width: 100%;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          gap: 325px;
+          bottom: -100px;
+
+          > button {
+            position: static;
+            background: transparent;
+            transform: translateY(0%);
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+            background-image: url("assets/arrow-left.png");
+
+            &:last-child {
+              background-image: url("assets/arrow-right.png");
+            }
+
+            svg {
+              display: none;
+            }
+          }
+        }
+
+        width: 100%;
+        background: white;
+        border-radius: 24px;
+        border: 2px solid #d6d6d6;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .main_slides .main_slide {
+        display: grid;
+        grid-template-areas:
+          "img review"
+          "reply review"
+          "platform platform";
+        padding: 40px;
+        column-gap: 40px;
+      }
+
+      .main_slide .client_img {
+        grid-area: img;
+        max-width: min-content;
+
+        .img {
+          img {
+            box-shadow: 2px 4px 12px 2px #0000004d;
+            width: 200px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            overflow: hidden;
+          }
+        }
+
+        h2 {
+          font-family: "Poppins", sans-serif;
+          font-size: 32px;
+          font-weight: 600;
+          line-height: 31.78px;
+          text-align: center;
+          margin: 15px 0;
+        }
+
+        .rating-stars {
+          display: flex;
+          gap: 5px;
+          justify-content: center;
+
+          img {
+            width: 32px;
+          }
+        }
+      }
+
+      .main_slide .client_review {
+        grid-area: review;
+
+        > span {
+          font-family: "Poppins", sans-serif;
+          font-size: 130px;
+          font-weight: 400;
+          line-height: 0px;
+          background: red;
+          margin: 50px 0 20px;
+          display: block;
+
+          &:last-child {
+            margin: 80px 0 0 auto;
+            text-align: right;
+          }
+        }
+
+        .review_text p {
+          font-family: "Poppins", sans-serif;
+          font-size: 22px;
+          font-weight: 400;
+          line-height: 28px;
+          color: #676767;
+        }
+      }
+
+      .main_slide .comp_reply {
+        grid-area: reply;
+        max-width: 250px;
+        background: #f7f7f7;
+        border-radius: 6px;
+        padding: 12px 16px;
+        align-self: start;
+
+        h3 {
+          font-family: "Poppins", sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 20px;
+          color: #0ca614;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-family: "Poppins", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+          color: #676767;
+        }
+      }
+
+      .main_slide .review_platform {
+        grid-area: platform;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        img {
+          width: 80px;
+        }
+
+        p {
+          font-family: "Poppins", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+          text-align: left;
+          color: #676767;
+        }
+      }
+
+      /* Media Query at 750px */
+      @media (max-width: 750px) {
+        .main_slides .main_slide {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .main_slide .client_img {
+          margin: 0 auto;
+        }
+
+        .main_slide .comp_reply {
+          max-width: 100%;
+          margin: 20px 0;
+        }
+
+        .main_slide .client_img {
+          .img img {
+            width: 160px;
+          }
+
+          h2 {
+            font-size: 28px;
+          }
+        }
+
+        .main_slide .client_img {
+          & .rating-stars {
+            img {
+              width: 26px;
+            }
+          }
+        }
+
+        .main_slide .client_review {
+          > span {
+            font-size: 100px;
+          }
+        }
+
+        .main_slide .client_review {
+          .review_text p {
+            font-size: 20px;
+          }
+        }
+
+        .main_slide .client_review {
+          & > span {
+            &:last-child {
+              margin: 50px 0 0 auto;
+            }
+          }
+        }
+
+        .slider_container_main .main_slides {
+          .pagination_container {
+            transform: translate(-50%, 0) scale(0.7);
+          }
+
+          .splide__arrows {
+            gap: 230px;
+            bottom: -95px;
+            left: -2px;
+
+            > button {
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+    <!-- Splide CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" />
+  </head>
+
+  <body>
+    <section class="slider_container_main">
+      <div class="splide main_slides">
+        <div class="splide__track">
+          <div class="splide__list">
+            <!-- Slide Card -->
+            <div class="splide__slide main_slide">
+              <!-- Image -->
+              <div class="client_img">
+                <!-- Profile Image -->
+                <div class="img">
+                  <img
+                    src="http://incitestrategies.credit/wp-content/uploads/2024/07/Nathan-P.png"
+                    alt="#" />
+                </div>
+                <!-- Name -->
+                <h2>Zonia Y.</h2>
+                <!-- Stars in the review -->
+                <div class="rating-stars">
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                </div>
+              </div>
+              <!-- Client Review Text -->
+              <div class="client_review">
+                <span>“</span>
+                <div class="review_text">
+                  <p>
+                    Thank you Incite Team and Ruben my account specialist for
+                    your honest and prompt work in assisting me in repairing my
+                    credit. They did a wonderful job in cleaning up my credit
+                    with a whopping average increase of 149 points from all
+                    three credit bureau was completed and I could not be
+                    happier! I am back in the 800's club!
+                    <br />
+                    <br />
+                    Remember this is an INVESTMENT in yourself! Whether this is
+                    for a home, car, new credit card, new loans, etc. You should
+                    always be prepared to have a healthy credit, so it will not
+                    be a financial thorn when a possible situation may arise.
+
+                    <br />
+                    <br />
+                    The team is professional, understanding, and opening in
+                    communicating with me about the processes and expectations.
+                    I appreciate the team so much, and highly recommend them.
+                  </p>
+                </div>
+                <span>”</span>
+              </div>
+              <!-- Company Reply -->
+              <div class="comp_reply">
+                <h3>Incite Strategies Credit Repair Replied:</h3>
+                <p>
+                  Zonia, your thoughtful review is incredibly appreciated! We're
+                  thrilled to hear you've rejoined the 800's club thanks to
+                  Ruben and our team's effort. Your satisfaction and success are
+                  what motivate us to deliver our best. Thank you for trusting
+                  Incite Strategies Credit Repair and for the high...
+                </p>
+              </div>
+              <!-- Review By Platform -->
+              <div class="review_platform">
+                <img src="assets/google-logo.png" alt="#" />
+                <p>
+                  Zonia Y. gave Incite Strategies Credit Repair a 5 star Review
+                </p>
+              </div>
+            </div>
+            <!-- Slide Card -->
+            <div class="splide__slide main_slide">
+              <!-- Image -->
+              <div class="client_img">
+                <!-- Profile Image -->
+                <div class="img">
+                  <img
+                    src="http://incitestrategies.credit/wp-content/uploads/2024/07/krissy-L.png"
+                    alt="#" />
+                </div>
+                <!-- Name -->
+                <h2>Zonia Y.</h2>
+                <!-- Stars in the review -->
+                <div class="rating-stars">
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                </div>
+              </div>
+              <!-- Client Review Text -->
+              <div class="client_review">
+                <span>“</span>
+                <div class="review_text">
+                  <p>
+                    Thank you Incite Team and Ruben my account specialist for
+                    your honest and prompt work in assisting me in repairing my
+                    credit. They did a wonderful job in cleaning up my credit
+                    with a whopping average increase of 149 points from all
+                    three credit bureau was completed and I could not be
+                    happier! I am back in the 800's club!
+                    <br />
+                    <br />
+                    Remember this is an INVESTMENT in yourself! Whether this is
+                    for a home, car, new credit card, new loans, etc. You should
+                    always be prepared to have a healthy credit, so it will not
+                    be a financial thorn when a possible situation may arise.
+
+                    <br />
+                    <br />
+                    The team is professional, understanding, and opening in
+                    communicating with me about the processes and expectations.
+                    I appreciate the team so much, and highly recommend them.
+                  </p>
+                </div>
+                <span>”</span>
+              </div>
+              <!-- Company Reply -->
+              <div class="comp_reply">
+                <h3>Incite Strategies Credit Repair Replied:</h3>
+                <p>
+                  Zonia, your thoughtful review is incredibly appreciated! We're
+                  thrilled to hear you've rejoined the 800's club thanks to
+                  Ruben and our team's effort. Your satisfaction and success are
+                  what motivate us to deliver our best. Thank you for trusting
+                  Incite Strategies Credit Repair and for the high...
+                </p>
+              </div>
+              <!-- Review By Platform -->
+              <div class="review_platform">
+                <img src="assets/google-logo.png" alt="#" />
+                <p>
+                  Zonia Y. gave Incite Strategies Credit Repair a 5 star Review
+                </p>
+              </div>
+            </div>
+            <!-- Slide Card -->
+            <div class="splide__slide main_slide">
+              <!-- Image -->
+              <div class="client_img">
+                <!-- Profile Image -->
+                <div class="img">
+                  <img
+                    src="http://incitestrategies.credit/wp-content/uploads/2024/07/Scott-B.png"
+                    alt="#" />
+                </div>
+                <!-- Name -->
+                <h2>Zonia Y.</h2>
+                <!-- Stars in the review -->
+                <div class="rating-stars">
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                </div>
+              </div>
+              <!-- Client Review Text -->
+              <div class="client_review">
+                <span>“</span>
+                <div class="review_text">
+                  <p>
+                    Thank you Incite Team and Ruben my account specialist for
+                    your honest and prompt work in assisting me in repairing my
+                    credit. They did a wonderful job in cleaning up my credit
+                    with a whopping average increase of 149 points from all
+                    three credit bureau was completed and I could not be
+                    happier! I am back in the 800's club!
+                    <br />
+                    <br />
+                    Remember this is an INVESTMENT in yourself! Whether this is
+                    for a home, car, new credit card, new loans, etc. You should
+                    always be prepared to have a healthy credit, so it will not
+                    be a financial thorn when a possible situation may arise.
+
+                    <br />
+                    <br />
+                    The team is professional, understanding, and opening in
+                    communicating with me about the processes and expectations.
+                    I appreciate the team so much, and highly recommend them.
+                  </p>
+                </div>
+                <span>”</span>
+              </div>
+              <!-- Company Reply -->
+              <div class="comp_reply">
+                <h3>Incite Strategies Credit Repair Replied:</h3>
+                <p>
+                  Zonia, your thoughtful review is incredibly appreciated! We're
+                  thrilled to hear you've rejoined the 800's club thanks to
+                  Ruben and our team's effort. Your satisfaction and success are
+                  what motivate us to deliver our best. Thank you for trusting
+                  Incite Strategies Credit Repair and for the high...
+                </p>
+              </div>
+              <!-- Review By Platform -->
+              <div class="review_platform">
+                <img src="assets/google-logo.png" alt="#" />
+                <p>
+                  Zonia Y. gave Incite Strategies Credit Repair a 5 star Review
+                </p>
+              </div>
+            </div>
+            <!-- Slide Card -->
+            <div class="splide__slide main_slide">
+              <!-- Image -->
+              <div class="client_img">
+                <!-- Profile Image -->
+                <div class="img">
+                  <img
+                    src="http://incitestrategies.credit/wp-content/uploads/2024/07/Brian-B.png"
+                    alt="#" />
+                </div>
+                <!-- Name -->
+                <h2>Zonia Y.</h2>
+                <!-- Stars in the review -->
+                <div class="rating-stars">
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                </div>
+              </div>
+              <!-- Client Review Text -->
+              <div class="client_review">
+                <span>“</span>
+                <div class="review_text">
+                  <p>
+                    Thank you Incite Team and Ruben my account specialist for
+                    your honest and prompt work in assisting me in repairing my
+                    credit. They did a wonderful job in cleaning up my credit
+                    with a whopping average increase of 149 points from all
+                    three credit bureau was completed and I could not be
+                    happier! I am back in the 800's club!
+                    <br />
+                    <br />
+                    Remember this is an INVESTMENT in yourself! Whether this is
+                    for a home, car, new credit card, new loans, etc. You should
+                    always be prepared to have a healthy credit, so it will not
+                    be a financial thorn when a possible situation may arise.
+
+                    <br />
+                    <br />
+                    The team is professional, understanding, and opening in
+                    communicating with me about the processes and expectations.
+                    I appreciate the team so much, and highly recommend them.
+                  </p>
+                </div>
+                <span>”</span>
+              </div>
+              <!-- Company Reply -->
+              <div class="comp_reply">
+                <h3>Incite Strategies Credit Repair Replied:</h3>
+                <p>
+                  Zonia, your thoughtful review is incredibly appreciated! We're
+                  thrilled to hear you've rejoined the 800's club thanks to
+                  Ruben and our team's effort. Your satisfaction and success are
+                  what motivate us to deliver our best. Thank you for trusting
+                  Incite Strategies Credit Repair and for the high...
+                </p>
+              </div>
+              <!-- Review By Platform -->
+              <div class="review_platform">
+                <img src="assets/google-logo.png" alt="#" />
+                <p>
+                  Zonia Y. gave Incite Strategies Credit Repair a 5 star Review
+                </p>
+              </div>
+            </div>
+            <!-- Slide Card -->
+            <div class="splide__slide main_slide">
+              <!-- Image -->
+              <div class="client_img">
+                <!-- Profile Image -->
+                <div class="img">
+                  <img
+                    src="http://incitestrategies.credit/wp-content/uploads/2024/07/Sirra-Anderson-Crum.png"
+                    alt="#" />
+                </div>
+                <!-- Name -->
+                <h2>Zonia Y.</h2>
+                <!-- Stars in the review -->
+                <div class="rating-stars">
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                  <img src="assets/star-img.png" alt="#" />
+                </div>
+              </div>
+              <!-- Client Review Text -->
+              <div class="client_review">
+                <span>“</span>
+                <div class="review_text">
+                  <p>
+                    Thank you Incite Team and Ruben my account specialist for
+                    your honest and prompt work in assisting me in repairing my
+                    credit. They did a wonderful job in cleaning up my credit
+                    with a whopping average increase of 149 points from all
+                    three credit bureau was completed and I could not be
+                    happier! I am back in the 800's club!
+                    <br />
+                    <br />
+                    Remember this is an INVESTMENT in yourself! Whether this is
+                    for a home, car, new credit card, new loans, etc. You should
+                    always be prepared to have a healthy credit, so it will not
+                    be a financial thorn when a possible situation may arise.
+
+                    <br />
+                    <br />
+                    The team is professional, understanding, and opening in
+                    communicating with me about the processes and expectations.
+                    I appreciate the team so much, and highly recommend them.
+                  </p>
+                </div>
+                <span>”</span>
+              </div>
+              <!-- Company Reply -->
+              <div class="comp_reply">
+                <h3>Incite Strategies Credit Repair Replied:</h3>
+                <p>
+                  Zonia, your thoughtful review is incredibly appreciated! We're
+                  thrilled to hear you've rejoined the 800's club thanks to
+                  Ruben and our team's effort. Your satisfaction and success are
+                  what motivate us to deliver our best. Thank you for trusting
+                  Incite Strategies Credit Repair and for the high...
+                </p>
+              </div>
+              <!-- Review By Platform -->
+              <div class="review_platform">
+                <img src="assets/google-logo.png" alt="#" />
+                <p>
+                  Zonia Y. gave Incite Strategies Credit Repair a 5 star Review
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var splide = new Splide(".splide", {
+      type: "loop",
+      autoplay: true,
+      interval: 5000,
+    });
+    splide.mount();
+
+    // Pagination Container
+    const pc = document.querySelector(
+      ".splide__pagination.splide__pagination--ltr"
+    );
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("pagination_container");
+    pc.parentElement.append(newDiv);
+    newDiv.append(pc);
+
+    var cardsBtns = pc.querySelectorAll("li button");
+
+    // appling bg images on paginations
+    cardsBtns.forEach((cardBtn, index) => {
+      const bgImgURL = document
+        .querySelectorAll(".splide .splide__slide  .client_img .img >img")
+        [index + 2].getAttribute("src");
+      cardBtn.style.backgroundImage = `url('${bgImgURL}')`;
+    });
+    document.querySelector(".splide__arrow.splide__arrow--next").click();
+    // calculating the total number of cards and make it first to the visible area by applying margin by 80px by one CardBtn
+    const cardsCount = cardsBtns.length;
+    const dValue = 104.5;
+    pc.style.left = dValue + "px";
+
+    splide.on("moved", function (newIndex) {
+      // if the card is first-one
+      if (newIndex === 0) {
+        pc.style.left = dValue + "px";
+      }
+
+      // //
+      else if (newIndex === 1) {
+        pc.style.left = "-8px";
+      }
+
+      // // if the card is last-one
+      else if (newIndex === cardsCount - 1) {
+        pc.style.left = -1 * dValue * (newIndex - 1) + "px";
+      }
+
+      // // if the card is not first or last-one
+      else {
+        pc.style.left = -1 * dValue * (newIndex - 1) + "px";
+      }
+    });
+  });
+</script>
